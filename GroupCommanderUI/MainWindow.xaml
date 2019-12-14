@@ -4,9 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GroupCommanderUI"
+        xmlns:vm   ="clr-namespace:GroupCommanderUI.MVVM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Group Commander" Height="500" Width="800">
+    <Window.Resources>
+        <vm:ShellViewModel  x:Key="ShellViewModel"></vm:ShellViewModel>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File"   DataContext="{Binding Source={StaticResource ShellViewModel}}">
+                    <MenuItem Header="_New"  Command="{Binding FileMenuCommand}"    CommandParameter="NEW" />
+                    <MenuItem Header="_Open" Command="{Binding FileMenuCommand}"    CommandParameter="OPEN"/>
+                    <MenuItem Header="_Save" Command="{Binding FileMenuCommand}"    CommandParameter="SAVE"/>
+                    <Separator />
+                    <MenuItem Header="_Exit" Command="{Binding FileMenuCommand}"    CommandParameter="EXIT" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <TextBox Grid.Row="2" Grid.ColumnSpan="2"></TextBox>
     </Grid>
 </Window>
